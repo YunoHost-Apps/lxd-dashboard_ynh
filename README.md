@@ -25,9 +25,6 @@ Makes it easy for you to take control of your LXD based infrastructure
 
 ![](./doc/screenshots/screenshot01.png)
 
-## Disclaimers / important information
-
-* First registered user will be in the admin group
 ## Documentation and resources
 
 * Official app website: https://lxdware.com

@@ -21,9 +21,6 @@ Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour
 
 ![](./doc/screenshots/screenshot01.png)
 
-## Avertissements / informations importantes
-
-* First registered user will be in the admin group
 ## Documentations et ressources
 
 * Site officiel de l'app : https://lxdware.com
