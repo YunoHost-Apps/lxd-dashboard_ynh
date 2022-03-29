@@ -17,7 +17,7 @@ If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/in
 
 Makes it easy for you to take control of your LXD based infrastructure
 
-**Shipped version:** 3.1.0~ynh1
+**Shipped version:** 3.2.0~ynh1
 
 
 
