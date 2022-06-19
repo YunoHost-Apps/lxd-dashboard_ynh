@@ -5,7 +5,7 @@ It shall NOT be edited by hand.
 
 # LXD Dashboard for YunoHost
 
-[![Integration level](https://dash.yunohost.org/integration/lxd-dashboard.svg)](https://dash.yunohost.org/appci/app/lxd-dashboard) ![](https://ci-apps.yunohost.org/ci/badges/lxd-dashboard.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/lxd-dashboard.maintain.svg)  
+[![Integration level](https://dash.yunohost.org/integration/lxd-dashboard.svg)](https://dash.yunohost.org/appci/app/lxd-dashboard) ![Working status](https://ci-apps.yunohost.org/ci/badges/lxd-dashboard.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/lxd-dashboard.maintain.svg)  
 [![Install LXD Dashboard with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=lxd-dashboard)
 
 *[Lire ce readme en français.](./README_fr.md)*
@@ -15,32 +15,37 @@ If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/in
 
 ## Overview
 
-Makes it easy for you to take control of your LXD based infrastructure
-
-**Shipped version:** 3.4.0~ynh1
+Web-based user interface capable of managing multiple LXD servers from a single location.
 
 
+**Shipped version:** 3.4.0~ynh2
 
 ## Screenshots
 
-![](./doc/screenshots/screenshot01.png)
+![Screenshot of LXD Dashboard](./doc/screenshots/screenshot01.png)
+
+## Disclaimers / important information
+
+* Important:
+    * Since version 3.4.0~ynh2, after a bad authentication that don't let you login, just refresh the page
 
 ## Documentation and resources
 
-* Official app website: https://lxdware.com
-* Upstream app code repository: https://github.com/lxdware/lxd-dashboard
-* YunoHost documentation for this app: https://yunohost.org/app_lxd-dashboard
-* Report a bug: https://github.com/YunoHost-Apps/lxd-dashboard_ynh/issues
+* Official app website: <https://lxdware.com>
+* Upstream app code repository: <https://github.com/lxdware/lxd-dashboard>
+* YunoHost documentation for this app: <https://yunohost.org/app_lxd-dashboard>
+* Report a bug: <https://github.com/YunoHost-Apps/lxd-dashboard_ynh/issues>
 
 ## Developer info
 
 Please send your pull request to the [testing branch](https://github.com/YunoHost-Apps/lxd-dashboard_ynh/tree/testing).
 
 To try the testing branch, please proceed like that.
-```
+
+``` bash
 sudo yunohost app install https://github.com/YunoHost-Apps/lxd-dashboard_ynh/tree/testing --debug
 or
 sudo yunohost app upgrade lxd-dashboard -u https://github.com/YunoHost-Apps/lxd-dashboard_ynh/tree/testing --debug
 ```
 
-**More info regarding app packaging:** https://yunohost.org/packaging_apps
+**More info regarding app packaging:** <https://yunohost.org/packaging_apps>
