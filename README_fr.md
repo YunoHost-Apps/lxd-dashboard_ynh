@@ -18,7 +18,7 @@ Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour
 Web-based user interface capable of managing multiple LXD servers from a single location.
 
 
-**Version incluse :** 3.4.0~ynh2
+**Version incluse :** 3.7.0~ynh1
 
 ## Captures d'écran
 
