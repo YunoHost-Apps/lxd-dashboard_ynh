@@ -1,5 +1,5 @@
-SOURCE_URL=https://github.com/lxdware/lxd-dashboard/archive/refs/tags/v3.4.0.tar.gz
-SOURCE_SUM=91884ba9feafd7cb613a0b795003cb32d4c6d21f9b611d2ace115e8c2f6562da
+SOURCE_URL=https://github.com/lxdware/lxd-dashboard/archive/refs/tags/v3.7.0.tar.gz
+SOURCE_SUM=061e9872ec3f429ebda00882ce802cacecc5498a325beb6a726bbb11e3980793
 SOURCE_SUM_PRG=sha256sum
 SOURCE_FORMAT=tar.gz
 SOURCE_IN_SUBDIR=true
