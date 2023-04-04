@@ -5,7 +5,8 @@ It shall NOT be edited by hand.
 
 # LXD Dashboard for YunoHost
 
-[![Integration level](https://dash.yunohost.org/integration/lxd-dashboard.svg)](https://dash.yunohost.org/appci/app/lxd-dashboard) ![Working status](https://ci-apps.yunohost.org/ci/badges/lxd-dashboard.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/lxd-dashboard.maintain.svg)  
+[![Integration level](https://dash.yunohost.org/integration/lxd-dashboard.svg)](https://dash.yunohost.org/appci/app/lxd-dashboard) ![Working status](https://ci-apps.yunohost.org/ci/badges/lxd-dashboard.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/lxd-dashboard.maintain.svg)
+
 [![Install LXD Dashboard with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=lxd-dashboard)
 
 *[Lire ce readme en français.](./README_fr.md)*
