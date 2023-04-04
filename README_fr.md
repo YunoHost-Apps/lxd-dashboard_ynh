@@ -5,24 +5,25 @@ It shall NOT be edited by hand.
 
 # LXD Dashboard pour YunoHost
 
-[![Niveau d'intégration](https://dash.yunohost.org/integration/lxd-dashboard.svg)](https://dash.yunohost.org/appci/app/lxd-dashboard) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/lxd-dashboard.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/lxd-dashboard.maintain.svg)  
+[![Niveau d’intégration](https://dash.yunohost.org/integration/lxd-dashboard.svg)](https://dash.yunohost.org/appci/app/lxd-dashboard) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/lxd-dashboard.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/lxd-dashboard.maintain.svg)
+
 [![Installer LXD Dashboard avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=lxd-dashboard)
 
 *[Read this readme in english.](./README.md)*
 
-> *Ce package vous permet d'installer LXD Dashboard rapidement et simplement sur un serveur YunoHost.
-Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour savoir comment l'installer et en profiter.*
+> *Ce package vous permet d’installer LXD Dashboard rapidement et simplement sur un serveur YunoHost.
+Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour savoir comment l’installer et en profiter.*
 
-## Vue d'ensemble
+## Vue d’ensemble
 
 Web-based user interface capable of managing multiple LXD servers from a single location.
 
 
-**Version incluse :** 3.4.0~ynh2
+**Version incluse :** 3.7.0~ynh1
 
-## Captures d'écran
+## Captures d’écran
 
-![Capture d'écran de LXD Dashboard](./doc/screenshots/screenshot01.png)
+![Capture d’écran de LXD Dashboard](./doc/screenshots/screenshot01.png)
 
 ## Avertissements / informations importantes
 
@@ -31,8 +32,8 @@ Web-based user interface capable of managing multiple LXD servers from a single 
 
 ## Documentations et ressources
 
-* Site officiel de l'app : <https://lxdware.com>
-* Dépôt de code officiel de l'app : <https://github.com/lxdware/lxd-dashboard>
+* Site officiel de l’app : <https://lxdware.com>
+* Dépôt de code officiel de l’app : <https://github.com/lxdware/lxd-dashboard>
 * Documentation YunoHost pour cette app : <https://yunohost.org/app_lxd-dashboard>
 * Signaler un bug : <https://github.com/YunoHost-Apps/lxd-dashboard_ynh/issues>
 
@@ -48,4 +49,4 @@ ou
 sudo yunohost app upgrade lxd-dashboard -u https://github.com/YunoHost-Apps/lxd-dashboard_ynh/tree/testing --debug
 ```
 
-**Plus d'infos sur le packaging d'applications :** <https://yunohost.org/packaging_apps>
+**Plus d’infos sur le packaging d’applications :** <https://yunohost.org/packaging_apps>
