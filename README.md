@@ -34,7 +34,7 @@ Web-based user interface capable of managing multiple LXD servers from a single 
 
 * Official app website: <https://lxdware.com>
 * Upstream app code repository: <https://github.com/lxdware/lxd-dashboard>
-* YunoHost documentation for this app: <https://yunohost.org/app_lxd-dashboard>
+* YunoHost Store: <https://apps.yunohost.org/app/lxd-dashboard>
 * Report a bug: <https://github.com/YunoHost-Apps/lxd-dashboard_ynh/issues>
 
 ## Developer info
