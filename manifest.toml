@@ -3,7 +3,7 @@ packaging_format = 2
 id = "lxd-dashboard"
 name = "LXD Dashboard"
 description.en = "Makes it easy for you to take control of your LXD based infrastructure"
-description.fr = "Makes it easy for you to take control of your LXD based infrastructure"
+description.fr = "Vous permet de prendre facilement le contrôle de votre infrastructure basée sur LXD"
 
 version = "3.8.0~ynh1"
 
