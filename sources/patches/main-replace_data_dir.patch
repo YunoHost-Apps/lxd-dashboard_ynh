@@ -1,0 +1,335 @@
+diff --git a/lxd-dashboard/backend/config/about.php b/lxd-dashboard/backend/config/about.php
+index 268ac7b..6476c11 100644
+--- a/lxd-dashboard/backend/config/about.php
++++ b/lxd-dashboard/backend/config/about.php
+@@ -26,7 +26,7 @@ if (!isset($_SESSION)) {
+ if (isset($_SESSION['username'])) {
+ 
+   //Include db_config.php file
+-  include_once('/var/lxdware/data/db_config.php');
++  include_once('/home/yunohost.app/lxd-dashboard/data/db_config.php');
+ 
+   switch (DB_TYPE) {
+     case "sqlite":
+diff --git a/lxd-dashboard/backend/config/cert.php b/lxd-dashboard/backend/config/cert.php
+index e2b3799..3c234f3 100644
+--- a/lxd-dashboard/backend/config/cert.php
++++ b/lxd-dashboard/backend/config/cert.php
+@@ -24,7 +24,7 @@ if (!isset($_SESSION)) {
+ 
+ function createCertificate($certificateFilename, $numberofDays = 3650){
+   //Only create the certificate if it does not already exist
+-  if (!file_exists('/var/lxdware/data/lxd/'.$certificateFilename.'.crt')){
++  if (!file_exists('/home/yunohost.app/lxd-dashboard/data/lxd/'.$certificateFilename.'.crt')){
+     $subject = array(
+       "commonName" => "LXDWARE",
+     );
+@@ -40,11 +40,11 @@ function createCertificate($certificateFilename, $numberofDays = 3650){
+     
+     //Generate self-signed EC cert
+     $x509 = openssl_csr_sign($csr, null, $private_key, $numberofDays);
+-    openssl_x509_export_to_file($x509, '/var/lxdware/data/lxd/'.$certificateFilename.'.crt');
+-    openssl_pkey_export_to_file($private_key, '/var/lxdware/data/lxd/'.$certificateFilename.'.key');
++    openssl_x509_export_to_file($x509, '/home/yunohost.app/lxd-dashboard/data/lxd/'.$certificateFilename.'.crt');
++    openssl_pkey_export_to_file($private_key, '/home/yunohost.app/lxd-dashboard/data/lxd/'.$certificateFilename.'.key');
+     
+     //Change permissions to lock down private key
+-    chmod('/var/lxdware/data/lxd/'.$certificateFilename.'.key',0600);
++    chmod('/home/yunohost.app/lxd-dashboard/data/lxd/'.$certificateFilename.'.key',0600);
+   }
+ }
+ 
+@@ -65,9 +65,9 @@ if (isset($_SESSION['username'])) {
+     case "createCertificateFiles":
+       if (validateAuthorization($action)) {
+         if (!empty($name)){
+-          if (!file_exists('/var/lxdware/data/lxd/'.$name.'.crt')){
++          if (!file_exists('/home/yunohost.app/lxd-dashboard/data/lxd/'.$name.'.crt')){
+             createCertificate($name, $days);
+-            if (file_exists('/var/lxdware/data/lxd/'.$name.'.crt') && file_exists('/var/lxdware/data/lxd/'.$name.'.key'))
++            if (file_exists('/home/yunohost.app/lxd-dashboard/data/lxd/'.$name.'.crt') && file_exists('/home/yunohost.app/lxd-dashboard/data/lxd/'.$name.'.key'))
+               echo '{"status": "Ok", "status_code": 200, "metadata": {"status": "Certificate files created"}}';
+             else
+               echo '{"status": "Bad Request", "status_code": 400, "metadata": {"error": "Unable to create all certificate files"}}';
+@@ -85,11 +85,11 @@ if (isset($_SESSION['username'])) {
+     case "deleteCertificateFiles":
+       if (validateAuthorization($action)) {
+         if (!empty($name)){
+-          unlink('/var/lxdware/data/lxd/'.$name.'.crt');
+-          unlink('/var/lxdware/data/lxd/'.$name.'.key');
++          unlink('/home/yunohost.app/lxd-dashboard/data/lxd/'.$name.'.crt');
++          unlink('/home/yunohost.app/lxd-dashboard/data/lxd/'.$name.'.key');
+         }
+         
+-        if (file_exists('/var/lxdware/data/lxd/'.$name.'.crt') || file_exists('/var/lxdware/data/lxd/'.$name.'.key'))
++        if (file_exists('/home/yunohost.app/lxd-dashboard/data/lxd/'.$name.'.crt') || file_exists('/home/yunohost.app/lxd-dashboard/data/lxd/'.$name.'.key'))
+           echo '{"status": "Bad Request", "status_code": 400, "metadata": {"error": "Unable to remove all certificate files"}}';
+         else 
+           echo '{"status": "Ok", "status_code": 200, "metadata": {"status": "Certificate files removed"}}';
+@@ -105,7 +105,7 @@ if (isset($_SESSION['username'])) {
+         $i = 0;
+         echo '{ "data": [';
+   
+-        foreach (glob("/var/lxdware/data/lxd/*.crt") as $filename) {
++        foreach (glob("/home/yunohost.app/lxd-dashboard/data/lxd/*.crt") as $filename) {
+   
+           $data = openssl_x509_parse(file_get_contents($filename));
+           $validFrom = date('Y-m-d H:i:s', $data['validFrom_time_t']);
+@@ -138,7 +138,7 @@ if (isset($_SESSION['username'])) {
+ 
+     case "viewCertificate":
+       if (validateAuthorization($action)) {
+-        $results = shell_exec("cat /var/lxdware/data/lxd/client.crt");
++        $results = shell_exec("cat /home/yunohost.app/lxd-dashboard/data/lxd/client.crt");
+         echo htmlentities($results);
+       }
+       else {
+diff --git a/lxd-dashboard/backend/config/curl.php b/lxd-dashboard/backend/config/curl.php
+index 7753f63..9642189 100644
+--- a/lxd-dashboard/backend/config/curl.php
++++ b/lxd-dashboard/backend/config/curl.php
+@@ -31,8 +31,8 @@ require_once('../config/db.php');
+ 
+ 
+ function sendCurlRequest($request_action, $request_type, $request_url, $request_data = "{}"){
+-  $cert = "/var/lxdware/data/lxd/client.crt";
+-  $key = "/var/lxdware/data/lxd/client.key";
++  $cert = "/home/yunohost.app/lxd-dashboard/data/lxd/client.crt";
++  $key = "/home/yunohost.app/lxd-dashboard/data/lxd/client.key";
+ 
+   //Set required variables
+   $get_connection_timeout = (isset($_SESSION['get_connection_timeout'])) ? $_SESSION['get_connection_timeout'] : 3;
+diff --git a/lxd-dashboard/backend/config/db.php b/lxd-dashboard/backend/config/db.php
+index e911499..68802eb 100644
+--- a/lxd-dashboard/backend/config/db.php
++++ b/lxd-dashboard/backend/config/db.php
+@@ -34,12 +34,12 @@ function in_array_r($needle, $haystacks){
+ function establishDatabaseConnection(){
+ 
+   //Require db_config.php file
+-  require_once('/var/lxdware/data/db_config.php');
++  require_once('/home/yunohost.app/lxd-dashboard/data/db_config.php');
+ 
+   switch (DB_TYPE) {
+     case "sqlite":
+       $_SESSION['db_type'] = "SQLite";
+-      $conn = new PDO('sqlite:/var/lxdware/data/sqlite/lxdware.sqlite');
++      $conn = new PDO('sqlite:/home/yunohost.app/lxd-dashboard/data/sqlite/lxdware.sqlite');
+       $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //needed for catch backward compatability with PHP 7
+       break;
+     case "mysql":
+diff --git a/lxd-dashboard/backend/config/login.php b/lxd-dashboard/backend/config/login.php
+index bb30ef6..4b283b1 100644
+--- a/lxd-dashboard/backend/config/login.php
++++ b/lxd-dashboard/backend/config/login.php
+@@ -34,7 +34,7 @@ switch ($action) {
+   case "loadLoginForm":
+     $showRegistrationForm = false;
+     
+-    if (!file_exists('/var/lxdware/data/db_config.php')){
++    if (!file_exists('/home/yunohost.app/lxd-dashboard/data/db_config.php')){
+       $showRegistrationForm = true;
+     }
+     else {
+@@ -127,10 +127,10 @@ switch ($action) {
+   
+   case "writeDatabaseConfig":
+     
+-    if (!file_exists('/var/lxdware/data/db_config.php')){
++    if (!file_exists('/home/yunohost.app/lxd-dashboard/data/db_config.php')){
+       if ($database_type == 'sqlite'){
+         try {
+-          $conn = new PDO('sqlite:/var/lxdware/data/sqlite/lxdware.sqlite');
++          $conn = new PDO('sqlite:/home/yunohost.app/lxd-dashboard/data/sqlite/lxdware.sqlite');
+           $db = null;
+         }
+         catch (PDOException $e){
+@@ -138,7 +138,7 @@ switch ($action) {
+           break;
+         }
+         
+-        $file = fopen("/var/lxdware/data/db_config.php", "w") or die('{"status": "Bad Request", "status_code": 400, "metadata": {"error": "Unable to write database configuration file"}}');
++        $file = fopen("/home/yunohost.app/lxd-dashboard/data/db_config.php", "w") or die('{"status": "Bad Request", "status_code": 400, "metadata": {"error": "Unable to write database configuration file"}}');
+         $txt = "<?php\n";
+         $txt .= "define( 'DB_TYPE', 'sqlite' );\n";
+         $txt .= "define( 'DB_NAME', '' );\n";
+@@ -148,7 +148,7 @@ switch ($action) {
+         $txt .= "?>";
+         fwrite($file, $txt);
+         fclose($file);
+-        chmod('/var/lxdware/data/db_config.php',0600);
++        chmod('/home/yunohost.app/lxd-dashboard/data/db_config.php',0600);
+       }
+ 
+       if ($database_type == 'mysql'){
+@@ -162,7 +162,7 @@ switch ($action) {
+           break;
+         }
+ 
+-        $file = fopen("/var/lxdware/data/db_config.php", "w") or die('{"status": "Bad Request", "status_code": 400, "metadata": {"error": "Unable to write database configuration file"}}');
++        $file = fopen("/home/yunohost.app/lxd-dashboard/data/db_config.php", "w") or die('{"status": "Bad Request", "status_code": 400, "metadata": {"error": "Unable to write database configuration file"}}');
+         $txt = "<?php\n";
+         $txt .= "define( 'DB_TYPE', 'mysql' );\n";
+         $txt .= "define( 'DB_NAME', '$database_name' );\n";
+@@ -172,13 +172,13 @@ switch ($action) {
+         $txt .= "?>";
+         fwrite($file, $txt);
+         fclose($file);
+-        chmod('/var/lxdware/data/db_config.php',0600);
++        chmod('/home/yunohost.app/lxd-dashboard/data/db_config.php',0600);
+       }
+ 
+       echo '{"status": "Ok", "status_code": 200, "metadata": "{}"}';
+     }
+     else {
+-      echo '{"status": "Bad Request", "status_code": 400, "metadata": {"error": "Database config file \'/var/lxdware/data/db_config.php\' already exists"}}';
++      echo '{"status": "Bad Request", "status_code": 400, "metadata": {"error": "Database config file \'/home/yunohost.app/lxd-dashboard/data/db_config.php\' already exists"}}';
+     }
+ 
+     break;
+diff --git a/lxd-dashboard/backend/lxd/containers-single.php b/lxd-dashboard/backend/lxd/containers-single.php
+index 7cbcc4c..13656b2 100644
+--- a/lxd-dashboard/backend/lxd/containers-single.php
++++ b/lxd-dashboard/backend/lxd/containers-single.php
+@@ -704,7 +704,7 @@ if (isset($_SESSION['username'])) {
+           $instance_only = ($instance_backup['instance_only'])?"true":"false";
+           $optimized_storage = ($instance_backup['optimized_storage'])?"true":"false";
+           $hostname = retrieveHostName($remote);
+-          $file = '/var/lxdware/backups/' . $hostname . '/' . $project . '/' . $instance . '/' . $instance_backup['name'];
++          $file = '/home/yunohost.app/lxd-dashboard/backups/' . $hostname . '/' . $project . '/' . $instance . '/' . $instance_backup['name'];
+           $file_exists = false;
+           $file_size = "";
+           $unit_size = "";
+diff --git a/lxd-dashboard/backend/lxd/containers.php b/lxd-dashboard/backend/lxd/containers.php
+index 0ccf4b8..d3ca545 100644
+--- a/lxd-dashboard/backend/lxd/containers.php
++++ b/lxd-dashboard/backend/lxd/containers.php
+@@ -398,7 +398,7 @@ if (isset($_SESSION['username'])) {
+ 
+     case "deleteInstanceBackup":
+       $hostname = retrieveHostName($remote); 
+-      $file = '/var/lxdware/backups/' . $hostname . '/' . $project . '/' . $instance . '/' . $name;
++      $file = '/home/yunohost.app/lxd-dashboard/backups/' . $hostname . '/' . $project . '/' . $instance . '/' . $name;
+       unlink($file);
+       $url = $base_url . "/1.0/containers/" . $instance . "/backups/" . $name . "?project=" . $project;
+       $results = sendCurlRequest($action, "DELETE", $url);
+@@ -477,7 +477,7 @@ if (isset($_SESSION['username'])) {
+ 
+     case "downloadInstanceExportFile": 
+       $hostname = retrieveHostName($remote);   
+-      $file = '/var/lxdware/backups/' . $hostname . '/' . $project . '/' . $instance . '/' . $name;
++      $file = '/home/yunohost.app/lxd-dashboard/backups/' . $hostname . '/' . $project . '/' . $instance . '/' . $name;
+       $file_name = basename($file);
+       $file_size = filesize($file);
+ 
+@@ -513,14 +513,14 @@ if (isset($_SESSION['username'])) {
+ 
+     case "exportInstanceBackup":
+       if (validateAuthorization($action)) {
+-        $cert = "/var/lxdware/data/lxd/client.crt";
+-        $key = "/var/lxdware/data/lxd/client.key";
++        $cert = "/home/yunohost.app/lxd-dashboard/data/lxd/client.crt";
++        $key = "/home/yunohost.app/lxd-dashboard/data/lxd/client.key";
+         $hostname = retrieveHostName($remote); 
+-        $file = '/var/lxdware/backups/' . $hostname . '/' . $project . '/' . $instance . '/' . $name;
++        $file = '/home/yunohost.app/lxd-dashboard/backups/' . $hostname . '/' . $project . '/' . $instance . '/' . $name;
+         if (!file_exists($file)){
+           //If there is no directory yet for the host to store backups, create it
+-          if (!file_exists('/var/lxdware/backups/' . $hostname . '/' . $project . '/' . $instance)){
+-            mkdir('/var/lxdware/backups/'.$hostname . '/' . $project . '/' . $instance, 0777, true);
++          if (!file_exists('/home/yunohost.app/lxd-dashboard/backups/' . $hostname . '/' . $project . '/' . $instance)){
++            mkdir('/home/yunohost.app/lxd-dashboard/backups/'.$hostname . '/' . $project . '/' . $instance, 0777, true);
+           }
+           
+           $url = $base_url . "/1.0/containers/" . $instance . "/backups/" . $name . "/export?project=" . $project;
+diff --git a/lxd-dashboard/backend/lxd/virtual-machines-single.php b/lxd-dashboard/backend/lxd/virtual-machines-single.php
+index 17d573b..0673d87 100644
+--- a/lxd-dashboard/backend/lxd/virtual-machines-single.php
++++ b/lxd-dashboard/backend/lxd/virtual-machines-single.php
+@@ -653,7 +653,7 @@ if (isset($_SESSION['username'])) {
+           $instance_only = ($instance_backup['instance_only'])?"true":"false";
+           $optimized_storage = ($instance_backup['optimized_storage'])?"true":"false";
+           $hostname = retrieveHostName($remote);
+-          $file = '/var/lxdware/backups/' . $hostname . '/' . $project . '/' . $instance . '/' . $instance_backup['name'];
++          $file = '/home/yunohost.app/lxd-dashboard/backups/' . $hostname . '/' . $project . '/' . $instance . '/' . $instance_backup['name'];
+           $file_exists = false;
+           $file_size = "";
+           $unit_size = "";
+diff --git a/lxd-dashboard/backend/lxd/virtual-machines.php b/lxd-dashboard/backend/lxd/virtual-machines.php
+index a01ce7d..df11017 100644
+--- a/lxd-dashboard/backend/lxd/virtual-machines.php
++++ b/lxd-dashboard/backend/lxd/virtual-machines.php
+@@ -318,7 +318,7 @@ if (isset($_SESSION['username'])) {
+ 
+     case "deleteInstanceBackup":
+       $hostname = retrieveHostName($remote); 
+-      $file = '/var/lxdware/backups/' . $hostname . '/' . $project . '/' . $instance . '/' . $name;
++      $file = '/home/yunohost.app/lxd-dashboard/backups/' . $hostname . '/' . $project . '/' . $instance . '/' . $name;
+       unlink($file);
+       $url = $base_url . "/1.0/instances/" . $instance . "/backups/" . $name . "?project=" . $project;
+       $results = sendCurlRequest($action, "DELETE", $url);
+@@ -397,7 +397,7 @@ if (isset($_SESSION['username'])) {
+ 
+     case "downloadInstanceExportFile": 
+       $hostname = retrieveHostName($remote);   
+-      $file = '/var/lxdware/backups/' . $hostname . '/' . $project . '/' . $instance . '/' . $name;
++      $file = '/home/yunohost.app/lxd-dashboard/backups/' . $hostname . '/' . $project . '/' . $instance . '/' . $name;
+       $file_name = basename($file);
+       $file_size = filesize($file);
+ 
+@@ -433,14 +433,14 @@ if (isset($_SESSION['username'])) {
+ 
+     case "exportInstanceBackup":
+       if (validateAuthorization($action)) {
+-        $cert = "/var/lxdware/data/lxd/client.crt";
+-        $key = "/var/lxdware/data/lxd/client.key";
++        $cert = "/home/yunohost.app/lxd-dashboard/data/lxd/client.crt";
++        $key = "/home/yunohost.app/lxd-dashboard/data/lxd/client.key";
+         $hostname = retrieveHostName($remote); 
+-        $file = '/var/lxdware/backups/' . $hostname . '/' . $project . '/' . $instance . '/' . $name;
++        $file = '/home/yunohost.app/lxd-dashboard/backups/' . $hostname . '/' . $project . '/' . $instance . '/' . $name;
+         if (!file_exists($file)){
+           //If there is no directory yet for the host to store backups, create it
+-          if (!file_exists('/var/lxdware/backups/' . $hostname . '/' . $project . '/' . $instance)){
+-            mkdir('/var/lxdware/backups/'.$hostname . '/' . $project . '/' . $instance, 0777, true);
++          if (!file_exists('/home/yunohost.app/lxd-dashboard/backups/' . $hostname . '/' . $project . '/' . $instance)){
++            mkdir('/home/yunohost.app/lxd-dashboard/backups/'.$hostname . '/' . $project . '/' . $instance, 0777, true);
+           }
+           
+           $url = $base_url . "/1.0/instances/" . $instance . "/backups/" . $name . "/export?project=" . $project;
+diff --git a/startup.sh b/startup.sh
+index 48aa2fe..90f6179 100644
+--- a/startup.sh
++++ b/startup.sh
+@@ -1,24 +1,24 @@
+ #!/bin/bash
+ 
+ #Setup LXD data directory
+-if [ ! -d /var/lxdware/data/lxd ]
++if [ ! -d /home/yunohost.app/lxd-dashboard/data/lxd ]
+ then
+-  mkdir -p /var/lxdware/data/lxd
++  mkdir -p /home/yunohost.app/lxd-dashboard/data/lxd
+ fi
+ 
+ #Create backups directory if needed
+-if [ ! -d /var/lxdware/backups ]
++if [ ! -d /home/yunohost.app/lxd-dashboard/backups ]
+ then
+-  mkdir -p /var/lxdware/backups
++  mkdir -p /home/yunohost.app/lxd-dashboard/backups
+ fi
+ 
+ #Create SQLite database directory if needed
+-if [ ! -d /var/lxdware/data/sqlite ]
++if [ ! -d /home/yunohost.app/lxd-dashboard/data/sqlite ]
+ then
+-  mkdir -p /var/lxdware/data/sqlite
++  mkdir -p /home/yunohost.app/lxd-dashboard/data/sqlite
+ fi
+ 
+-chown -R www-data:www-data /var/lxdware/
++chown -R www-data:www-data /home/yunohost.app/lxd-dashboard/
+ 
+ #Start PHP for NGINX
+ service php7.4-fpm start

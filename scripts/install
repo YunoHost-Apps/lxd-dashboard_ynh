@@ -42,6 +42,9 @@ ynh_local_curl "/backend/config/login.php?database_type=mysql&database_host=loca
 ynh_local_curl "/backend/admin/settings.php?action=createUser" "username=$admin" "password=$password"
 ynh_local_curl "/backend/admin/settings.php?action=createUser" "email=$(ynh_user_get_info --username=$admin --key=mail)" "first_name=$(ynh_user_get_info --username=$admin --key=firstname)" "last_name=$(ynh_user_get_info --username=$admin --key=lastname)" "password=$password" "username=$admin"
 
+chmod -R o-rwx "$data_dir"
+chown -R $app: "$data_dir"
+
 #=================================================
 # END OF SCRIPT
 #=================================================
