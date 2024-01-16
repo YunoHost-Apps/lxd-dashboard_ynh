@@ -53,6 +53,9 @@ ynh_add_config --template="db_config.php" --destination="$data_dir/data/db_confi
 chmod 400 "$data_dir/data/db_config.php"
 chown $app:$app "$data_dir/data/db_config.php"
 
+chmod -R o-rwx "$data_dir"
+chown -R $app: "$data_dir"
+
 #=================================================
 # END OF SCRIPT
 #=================================================
