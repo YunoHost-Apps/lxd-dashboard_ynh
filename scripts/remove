@@ -20,6 +20,8 @@ ynh_remove_nginx_config
 # Remove the dedicated PHP-FPM config
 ynh_remove_fpm_config
 
+ynh_secure_remove --file="$data_dir"
+
 #=================================================
 # END OF SCRIPT
 #=================================================
