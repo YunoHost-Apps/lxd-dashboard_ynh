@@ -19,7 +19,7 @@ Il NE doit PAS être modifié à la main.
 Web-based user interface capable of managing multiple LXD servers from a single location.
 
 
-**Version incluse :** 3.8.0~ynh2
+**Version incluse :** 3.8.0~ynh3
 
 ## Captures d’écran
 
