@@ -10,10 +10,13 @@ ynh_script_progression "Setting up source files..."
 
 ynh_setup_source --dest_dir="$install_dir"
 
+chmod -R o-rwx "$data_dir"
+chown -R $app: "$data_dir"
+
 #=================================================
-# PHP-FPM CONFIGURATION
+# SYSTEM CONFIGURATION
 #=================================================
-ynh_script_progression "Configuring PHP-FPM..."
+ynh_script_progression "Adding system configurations related to $app..."
 
 ynh_config_add_phpfpm
 
@@ -24,14 +27,10 @@ ynh_config_add_nginx
 #=================================================
 ynh_script_progression "Setuping application with CURL..."
 
-# Installation with curl
 ynh_script_progression "Finalizing installation..."
 ynh_local_curl "/backend/config/login.php?database_type=mysql&database_host=localhost&database_name=$db_name&database_user=$db_user&action=writeDatabaseConfig" "database_password=$db_pwd"
 ynh_local_curl "/backend/admin/settings.php?action=createUser" "username=$admin" "password=$password"
 ynh_local_curl "/backend/admin/settings.php?action=createUser" "email=$(ynh_user_get_info --username=$admin --key=mail)" "first_name=$(ynh_user_get_info --username=$admin --key=firstname)" "last_name=$(ynh_user_get_info --username=$admin --key=lastname)" "password=$password" "username=$admin"
-
-chmod -R o-rwx "$data_dir"
-chown -R $app: "$data_dir"
 
 #=================================================
 # END OF SCRIPT
