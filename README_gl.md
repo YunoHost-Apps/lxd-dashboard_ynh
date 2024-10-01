@@ -5,7 +5,7 @@ NON debe editarse manualmente.
 
 # LXD Dashboard para YunoHost
 
-[![Nivel de integración](https://dash.yunohost.org/integration/lxd-dashboard.svg)](https://dash.yunohost.org/appci/app/lxd-dashboard) ![Estado de funcionamento](https://ci-apps.yunohost.org/ci/badges/lxd-dashboard.status.svg) ![Estado de mantemento](https://ci-apps.yunohost.org/ci/badges/lxd-dashboard.maintain.svg)
+[![Nivel de integración](https://dash.yunohost.org/integration/lxd-dashboard.svg)](https://ci-apps.yunohost.org/ci/apps/lxd-dashboard/) ![Estado de funcionamento](https://ci-apps.yunohost.org/ci/badges/lxd-dashboard.status.svg) ![Estado de mantemento](https://ci-apps.yunohost.org/ci/badges/lxd-dashboard.maintain.svg)
 
 [![Instalar LXD Dashboard con YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=lxd-dashboard)
 
@@ -19,7 +19,7 @@ NON debe editarse manualmente.
 Web-based user interface capable of managing multiple LXD servers from a single location.
 
 
-**Versión proporcionada:** 3.8.0~ynh2
+**Versión proporcionada:** 3.8.0~ynh3
 
 ## Capturas de pantalla
 

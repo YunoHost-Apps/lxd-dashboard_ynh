@@ -5,7 +5,7 @@
 
 # YunoHost 上的 LXD Dashboard
 
-[![集成程度](https://dash.yunohost.org/integration/lxd-dashboard.svg)](https://dash.yunohost.org/appci/app/lxd-dashboard) ![工作状态](https://ci-apps.yunohost.org/ci/badges/lxd-dashboard.status.svg) ![维护状态](https://ci-apps.yunohost.org/ci/badges/lxd-dashboard.maintain.svg)
+[![集成程度](https://dash.yunohost.org/integration/lxd-dashboard.svg)](https://ci-apps.yunohost.org/ci/apps/lxd-dashboard/) ![工作状态](https://ci-apps.yunohost.org/ci/badges/lxd-dashboard.status.svg) ![维护状态](https://ci-apps.yunohost.org/ci/badges/lxd-dashboard.maintain.svg)
 
 [![使用 YunoHost 安装 LXD Dashboard](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=lxd-dashboard)
 
@@ -19,7 +19,7 @@
 Web-based user interface capable of managing multiple LXD servers from a single location.
 
 
-**分发版本：** 3.8.0~ynh2
+**分发版本：** 3.8.0~ynh3
 
 ## 截图
 
